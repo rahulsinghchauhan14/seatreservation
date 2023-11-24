@@ -1,0 +1,45 @@
+<!-- this is the seat reservation form -->
+<div class="container text-center">
+    <div class="mx-auto">
+      <form class="row g-3" [formGroup]="reservationForm" (submit)="onSubmit()">
+        <div class="form-group">
+            <div class="col-md-6 offset-md-3">
+                <label for="inputEmail4" class="form-label"><b>Enter no of seat</b>
+                  <input type="text" class="form-control" formControlName="noOfSeat" id="noOfSeat">
+                </label>
+                <div *ngIf="reservationForm.controls.noOfSeat.invalid && reservationForm.controls.noOfSeat.touched">
+                  <p class="text-danger">Please enter a valid number of seats, such as 2, 4, 6, 1, etc.</p>
+                </div>
+                <div *ngIf="errorMessage"><p class="text-danger">{{ errorMessage }}</p></div> 
+              </div>
+              <div *ngIf="!seatMatch; else elseBlock">
+                <h6 class="text-danger">No more seats are available for reservation.</h6>
+              </div>
+              
+              <ng-template #elseBlock>
+                <div class="col-md-12 d-flex justify-content-center"> 
+                  <button [disabled]="!reservationForm.valid" type="submit" class="btn btn-primary mt-4">Confirm Reservation</button>
+                </div> 
+              </ng-template>
+              
+        </div>
+      </form>
+    </div> 
+</div>
+
+<div class="container text-center">
+  <div class="mx-auto">
+    <div *ngIf="reservationData" class="mx-auto"> 
+      <div class="card text-center mt-5 mb-5 row"> 
+        <div class="card-body">
+          <h5 class="card-title text-success">Reservation Successful!</h5>
+          <ul class="list-group">
+            <li  class="list-group-item" *ngFor="let seat of reservationData">
+              <b>Seat No.</b> {{ seat.seat_number }} - <b>Row</b> {{ seat.row_number }}, <b>Coach</b> {{ seat.coach_id }}
+            </li>
+          </ul>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
