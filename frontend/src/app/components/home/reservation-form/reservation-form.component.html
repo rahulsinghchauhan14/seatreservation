@@ -4,7 +4,7 @@
       <form class="row g-3" [formGroup]="reservationForm" (submit)="onSubmit()">
         <div class="form-group">
             <div class="col-md-6 offset-md-3">
-                <label for="inputEmail4" class="form-label"><b>Enter no of seat</b>
+                <label for="inputEmail4" class="form-label"><b>Enter no of seat</b><span class="text-danger note">(Max 7 seats per booking)</span>
                   <input type="text" class="form-control" formControlName="noOfSeat" id="noOfSeat">
                 </label>
                 <div *ngIf="reservationForm.controls.noOfSeat.invalid && reservationForm.controls.noOfSeat.touched">
